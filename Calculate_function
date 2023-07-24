@@ -1,0 +1,46 @@
+Best practice :
+=========================================================================
+import React from 'react'
+
+const playground = () => {
+
+  const radius = [5,10,15,20];
+  console.log(Math.PI);
+
+  const area = function(r)
+  {
+    return Math.PI*r*r;
+  }
+
+  const diameter = function(r)
+  {
+    return 2 * Math.PI*r;
+  }
+
+  const calculate = function(radius,logic)
+{
+          const output=[];
+          for(let i=0;i<radius.length;i++)
+            {
+               output.push(logic(radius[i]));
+            }
+               return output;
+ }
+
+ console.log(calculate(radius,area));
+ console.log(calculate(radius, diameter));
+
+  return (
+   <>
+   </>
+  )
+}
+
+export default playground;
+
+=========================================================================
+=========================================================================
+
+In React,
+We use the best practices of "Don't repeat yourself",
+so, here we are using one calculate function and reusing it again and again.
