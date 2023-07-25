@@ -1,0 +1,13 @@
+useLayoutEffect  ==================
+
+This hook is executed almost the same as the useEffect. It takes a function which runs the side effect. The return value of the function(which is a function or undefined) does cleanup. Here’s a useful metaphor to understand the system of effects and cleanup functions:
+
+Let’s say you have booked a hotel in another city for the next week. But, due to a family emergency, you have to cancel. So, we need to inform the hotel that you can’t make it and your visit should be postponed/cancel.
+
+In a similar fashion, the side effect is booking a hotel. The “family emergency” in this case is the component being unmounted(the cleanup function is called when this happens). Because we can’t make it, we’ll need to inform the hotel that we need to cancel which is basically the clean up function. Here’s how we can use this hook:
+
+useLayoutEffect(() => {
+  // DOM manipulation
+// Optional cleanup function
+  return () => {};
+}, []);
