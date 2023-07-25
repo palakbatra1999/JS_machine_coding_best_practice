@@ -11,3 +11,28 @@ useLayoutEffect(() => {
 // Optional cleanup function
   return () => {};
 }, []);
+
+
+The Grand Comparison
+useEffect
+The catch is that useEffect runs asynchronously and after a render is painted to the screen. It's more performant this way and perfect for API calls, most of the time this is what you want.
+
+However, if your effect is mutating the DOM(DOM node ref), then the user will see a flicker of content. For a split second, the page will be blank and then it will be visible again in a second. This is due to the time taken for the useEffect to mutate the DOM and then render it. Here’s a step by step process of what happens:
+
+A render is triggered in the application(dependency change)
+React renders your component
+React updates the screen(visually)
+Then, the useEffect is called in the background.
+If you mutate DOM node refs in useEffect, then a re-render is triggered, and while the effect is changing the DOM, the screen goes blank. Once the effect is done mutating the DOM, the screen is updated
+Rinse and Repeat!
+useLayoutEffect
+useLayoutEffect
+On the other hand, this runs synchronously after the component is updated. Here’s how this works:
+
+A render is triggered(dependency change)
+React renders your component
+Next, useLayoutEffect is called
+As I said, useLayoutEffect is synchronous so React waits for it to finish
+The screen is updated
+Repeat again!
+A simple rule of thumb I follow: just try using useEffect 99% of the time; if your component is flickering, try switching to useLayoutEffect.
